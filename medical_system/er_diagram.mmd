@@ -1,0 +1,56 @@
+erDiagram
+    specialties ||--o{ doctors : "включает"
+    patients ||--o{ appointments : "записывается"
+    doctors ||--o{ appointments : "проводит"
+    appointments ||..o{ appointment_diagnoses : "имеет"
+    diagnoses ||..o{ appointment_diagnoses : "устанавливается"
+    appointments ||--o{ referrals : "выдает направление"
+
+    specialties {
+        BIGINT id PK
+        TEXT name UK
+    }
+
+    patients {
+        BIGINT id PK
+        TEXT name
+        DATE birth_date
+        VARCHAR(20) phone UK
+        VARCHAR(16) policy_number UK
+    }
+
+    doctors {
+        BIGINT id PK
+        BIGINT specialty_id FK
+        TEXT name
+        VARCHAR(20) license_number UK
+    }
+
+    appointments {
+        BIGINT id PK
+        BIGINT patient_id FK
+        BIGINT doctor_id FK
+        TIMESTAMPTZ appointment_time
+        TEXT status
+        NUMERIC fee
+        TEXT notes
+    }
+
+    diagnoses {
+        BIGINT id PK
+        TEXT name UK
+        TEXT description
+    }
+
+    appointment_diagnoses {
+        BIGINT appointment_id PK, FK
+        BIGINT diagnosis_id PK, FK
+    }
+
+    referrals {
+        BIGINT id PK
+        BIGINT appointment_id FK
+        TEXT examination
+        TIMESTAMPTZ issued_at
+        TEXT status
+    }
