@@ -1,0 +1,20 @@
+# Виртуальное окружение Python
+.venv/
+venv/
+env/
+
+# Настройки DBeaver
+.dbeaver/
+
+# Файлы IDE
+.project
+.idea/
+.vscode/
+
+# Python мусор
+__pycache__/
+*.pyc
+
+# Системный мусор
+.DS_Store
+Thumbs.db
